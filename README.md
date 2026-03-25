@@ -103,4 +103,4 @@ https://www.npmjs.com/package/node-mumble
 
 ## 📄 License
 
-ISC
+MIT

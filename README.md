@@ -1,10 +1,9 @@
-# genkode
+# genkode - Random String & ID Generator for Node.js
 
 ![npm version](https://img.shields.io/npm/v/genkode)
 ![npm downloads](https://img.shields.io/npm/dw/genkode)
 ![license](https://img.shields.io/npm/l/genkode)
 ![types](https://img.shields.io/npm/types/genkode)
-
 
 A lightweight Node.js utility to generate random alphanumeric, alphabetic, or numeric strings.  
 Fully compatible with TypeScript. No external dependencies.
@@ -21,60 +20,57 @@ npm install genkode
 
 ## 🚀 Usage
 
-### 1. Generate Alphanumeric String
+### Generate using main API
 
 ```ts
-import { mumble } from 'genkode';
+import { generateCode } from 'genkode';
 
-console.log(mumble(12));
+generateCode({ length: 12 });
+// Example: aZ8kL2pQ9xW1
 
-// Example output:
-// vl6QLrr3xIBe
+generateCode({ length: 12, type: "alpha" });
+// Example: rqfvYxJRWfoP
+
+generateCode({ length: 12, type: "numeric" });
+// Example: 362128126198
 ```
 
 ---
 
-### 2. Generate Alphabet-only String
+### Simple helper functions
 
 ```ts
-import { mumblealpha } from 'genkode';
+import { randomString, randomAlpha, randomNumeric } from 'genkode';
 
-console.log(mumblealpha(12));
-
-// Example output:
-// rqfvYxJRWfoP
-```
-
----
-
-### 3. Generate Numeric String
-
-```ts
-import { mumblenum } from 'genkode';
-
-console.log(mumblenum(12));
-
-// Example output:
-// 362128126198
+randomString(12);   // alphanumeric
+randomAlpha(12);    // alphabets only
+randomNumeric(12);  // numbers only
 ```
 
 ---
 
 ## ⚙️ API
 
-| Function        | Description                          |
-|----------------|--------------------------------------|
-| `mumble(n)`     | Returns alphanumeric string          |
-| `mumblealpha(n)`| Returns alphabet-only string         |
-| `mumblenum(n)`  | Returns numeric string               |
+### generateCode(options)
 
-- `n` → Length of the required string
+| Property | Type | Description |
+|----------|------|-------------|
+| length   | number | Required length of string |
+| type     | "alpha" \| "numeric" \| "alphanumeric" | Optional (default: alphanumeric) |
+
+---
+
+## ⚡ Why genkode?
+
+- Zero dependencies
+- Fast and lightweight
+- TypeScript support
+- Simple and flexible API
+- Multiple formats (alpha, numeric, alphanumeric)
 
 ---
 
 ## 🧩 Use Cases
-
-These generated strings can be used for:
 
 - Database IDs  
 - Tokens / API keys  
@@ -86,17 +82,16 @@ These generated strings can be used for:
 
 ## 🔒 Notes
 
-- This package uses standard random generation (`Math.random`)
-- Suitable for general-purpose use
-- Not recommended for cryptographic/security-critical use cases
+- Uses Math.random (not cryptographically secure)
+- Suitable for general-purpose usage
 
 ---
 
 ## 🔗 Related Package
 
-This package is also available as a JavaScript-only version:
+JavaScript-only version:
 
-**node-mumble** (by the same developer)  
+node-mumble (by same developer)  
 https://www.npmjs.com/package/node-mumble
 
 ---

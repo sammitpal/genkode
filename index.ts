@@ -1,46 +1,36 @@
-const arr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"];
+import type { GenerateCodeOptions } from "./kode.interface.js";
 
-function isLetter(s:string)
-{
-  return s.match("^[a-zA-Z\(\)]+$");    
-}
-function isNumeric(s:string)
-{
-  return s.match("^[0-9\(\)]+$");    
-}
+const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const NUMERIC = "0123456789";
+const ALPHANUM = ALPHA + NUMERIC;
 
-export function mumble(input:number):string {
-  let uniqString = "";
-  const length = arr.length
-  while (input!=0) {
-    const randomIndex = Math.floor(Math.random()*length)
-    uniqString = uniqString+arr[randomIndex];
-    input = input - 1;
+function generate(length: number, charset: string): string {
+  let result = "";
+  const max = charset.length;
+
+  while (length > 0) {
+    const index = Math.floor(Math.random() * max);
+    result += charset[index];
+    length--;
   }
-  return uniqString
+
+  return result;
 }
 
-export function mumbleaplha(input:number): string {
-  let uniqString = "";
-  const length = arr.length
-  while (input!=0) {
-    const randomIndex = Math.floor(Math.random()*length)
-    if(isLetter(arr[randomIndex]!)){
-      uniqString = uniqString+arr[randomIndex];
-      input = input - 1;
-    }
-  }
-  return uniqString
+export function generateCode({ length, type = "alphanumeric" }: GenerateCodeOptions): string {
+  if (type === "alpha") return generate(length, ALPHA);
+  if (type === "numeric") return generate(length, NUMERIC);
+  return generate(length, ALPHANUM);
 }
-export function mumblenum(input:number): string {
-  let uniqString = "";
-  const length = arr.length
-  while (input!=0) {
-    const randomIndex = Math.floor(Math.random()*length)
-    if(isNumeric(arr[randomIndex]!)){
-      uniqString = uniqString+arr[randomIndex];
-      input = input - 1;
-    }
-  }
-  return uniqString
+
+export function randomString(length: number): string {
+  return generate(length, ALPHANUM);
+}
+
+export function randomAlpha(length: number): string {
+  return generate(length, ALPHA);
+}
+
+export function randomNumeric(length: number): string {
+  return generate(length, NUMERIC);
 }

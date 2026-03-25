@@ -15,15 +15,29 @@
   },
   "keywords": [
     "random",
-    "string",
-    "generator",
-    "id",
+    "random-string",
+    "string-generator",
+    "random-id",
+    "id-generator",
     "token",
-    "alphanumeric"
+    "token-generator",
+    "alphanumeric",
+    "alphabet",
+    "numeric",
+    "random-code",
+    "code-generator",
+    "unique-id",
+    "lightweight",
+    "zero-dependency",
+    "typescript",
+    "nodejs",
+    "utility"
   ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "tsx": "^4.21.0",
+    "txc": "^0.0.1",
     "typescript": "^6.0.2"
   },
   "bugs": {

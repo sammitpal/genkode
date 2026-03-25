@@ -1,42 +1,30 @@
-const arr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-function isLetter(s) {
-    return s.match("^[a-zA-Z\(\)]+$");
-}
-function isNumeric(s) {
-    return s.match("^[0-9\(\)]+$");
-}
-export function mumble(input) {
-    let uniqString = "";
-    const length = arr.length;
-    while (input != 0) {
-        const randomIndex = Math.floor(Math.random() * length);
-        uniqString = uniqString + arr[randomIndex];
-        input = input - 1;
+const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const NUMERIC = "0123456789";
+const ALPHANUM = ALPHA + NUMERIC;
+function generate(length, charset) {
+    let result = "";
+    const max = charset.length;
+    while (length > 0) {
+        const index = Math.floor(Math.random() * max);
+        result += charset[index];
+        length--;
     }
-    return uniqString;
+    return result;
 }
-export function mumbleaplha(input) {
-    let uniqString = "";
-    const length = arr.length;
-    while (input != 0) {
-        const randomIndex = Math.floor(Math.random() * length);
-        if (isLetter(arr[randomIndex])) {
-            uniqString = uniqString + arr[randomIndex];
-            input = input - 1;
-        }
-    }
-    return uniqString;
+export function generateCode({ length, type = "alphanumeric" }) {
+    if (type === "alpha")
+        return generate(length, ALPHA);
+    if (type === "numeric")
+        return generate(length, NUMERIC);
+    return generate(length, ALPHANUM);
 }
-export function mumblenum(input) {
-    let uniqString = "";
-    const length = arr.length;
-    while (input != 0) {
-        const randomIndex = Math.floor(Math.random() * length);
-        if (isNumeric(arr[randomIndex])) {
-            uniqString = uniqString + arr[randomIndex];
-            input = input - 1;
-        }
-    }
-    return uniqString;
+export function randomString(length) {
+    return generate(length, ALPHANUM);
+}
+export function randomAlpha(length) {
+    return generate(length, ALPHA);
+}
+export function randomNumeric(length) {
+    return generate(length, NUMERIC);
 }
 //# sourceMappingURL=index.js.map

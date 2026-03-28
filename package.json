@@ -1,7 +1,7 @@
 {
   "name": "genkode",
   "version": "1.1.0",
-  "description": "A node package that creates a random unique characters string (Typescript Supported)",
+  "description": "A lightweight Node.js utility to generate random alphanumeric, alphabetic, or numeric strings.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
@@ -10,6 +10,7 @@
   },
   "type": "module",
   "scripts": {
+    "test": "node --test",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
@@ -36,6 +37,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^25.5.0",
     "tsx": "^4.21.0",
     "txc": "^0.0.1",
     "typescript": "^6.0.2"
@@ -43,5 +45,8 @@
   "bugs": {
     "url": "https://github.com/sammitpal/genkode/issues"
   },
-  "homepage": "https://github.com/sammitpal/genkode#readme"
+  "homepage": "https://github.com/sammitpal/genkode#readme",
+  "dependencies": {
+    "crypto": "^1.0.1"
+  }
 }

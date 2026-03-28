@@ -26,37 +26,30 @@ npm install genkode
 import { generateCode } from 'genkode';
 
 generateCode({ length: 12 });
-// Example: aZ8kL2pQ9xW1
+// Example: rqfvYxJRWfoP  (alpha by default)
 
-generateCode({ length: 12, type: "alpha" });
-// Example: rqfvYxJRWfoP
+generateCode({ length: 12, type: "alphanumeric" });
+// Example: aZ8kL2pQ9xW1
 
 generateCode({ length: 12, type: "numeric" });
 // Example: 362128126198
-```
 
----
-
-### Simple helper functions
-
-```ts
-import { randomString, randomAlpha, randomNumeric } from 'genkode';
-
-randomString(12);   // alphanumeric
-randomAlpha(12);    // alphabets only
-randomNumeric(12);  // numbers only
+// Cryptographically secure generation
+generateCode({ length: 12, type: "alphanumeric", secure: true });
+// Example: Tz3mW8qA1nXp
 ```
 
 ---
 
 ## ⚙️ API
 
-### generateCode(options)
+### `generateCode(options)`
 
-| Property | Type | Description |
-|----------|------|-------------|
-| length   | number | Required length of string |
-| type     | "alpha" \| "numeric" \| "alphanumeric" | Optional (default: alphanumeric) |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `length` | `number` | — | Required. Length of the generated string |
+| `type` | `"alpha"` \| `"numeric"` \| `"alphanumeric"` | `"alpha"` | Character set to use |
+| `secure` | `boolean` | `false` | Use `crypto.getRandomValues` for cryptographically secure output |
 
 ---
 
@@ -67,6 +60,7 @@ randomNumeric(12);  // numbers only
 - TypeScript support
 - Simple and flexible API
 - Multiple formats (alpha, numeric, alphanumeric)
+- Optional cryptographically secure mode via Web Crypto API
 
 ---
 
@@ -80,10 +74,15 @@ randomNumeric(12);  // numbers only
 
 ---
 
-## 🔒 Notes
+## 🔒 Security
 
-- Uses Math.random (not cryptographically secure)
-- Suitable for general-purpose usage
+By default, `generateCode` uses `Math.random`, which is fast but **not cryptographically secure**.
+
+Set `secure: true` to use `crypto.getRandomValues` (Web Crypto API), which produces unbiased, cryptographically secure output. Use this when generating tokens, API keys, or any value where predictability is a security concern.
+
+```ts
+generateCode({ length: 32, type: "alphanumeric", secure: true });
+```
 
 ---
 

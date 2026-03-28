@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import test from "node:test";
 import assert from "node:assert";
-import { generateCode } from "../dist/index.js";
+import { generateCode } from "../index.js";
 
 // Helper regex
 const alphaRegex = /^[A-Za-z]+$/;

@@ -42,7 +42,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # required for commit history
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -64,14 +64,14 @@ jobs:
       - name: Determine version bump
         id: version
         run: |
-          MSG=$(git log -1 --pretty=%B)
+          MSG="$(git log -1 --pretty=%B)"
 
           if [[ "$MSG" == *"BREAKING"* ]]; then
-            echo "type=major" >> $GITHUB_OUTPUT
+            echo "type=major" >> "$GITHUB_OUTPUT"
           elif [[ "$MSG" == *"feat"* ]]; then
-            echo "type=minor" >> $GITHUB_OUTPUT
+            echo "type=minor" >> "$GITHUB_OUTPUT"
           else
-            echo "type=patch" >> $GITHUB_OUTPUT
+            echo "type=patch" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Bump version

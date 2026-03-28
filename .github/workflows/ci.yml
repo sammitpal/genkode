@@ -74,6 +74,11 @@ jobs:
             echo "type=patch" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Stage build output
+        run: |
+          git add -A
+          git diff --cached --quiet || git commit -m "chore: build output"
+
       - name: Bump version
         run: 'npm version ${{ steps.version.outputs.type }} -m "release: %s"'
 

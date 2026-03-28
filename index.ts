@@ -1,4 +1,4 @@
-import type { GenerateCodeOptions } from "./kode.interface.js";
+import type { GenerateOptions } from "./kode.interface.js";
 
 const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const NUMERIC = "0123456789";
@@ -10,27 +10,52 @@ function generate(length: number, charset: string): string {
 
   while (length > 0) {
     const index = Math.floor(Math.random() * max);
-    result += charset[index];
+    result += charset[index]!;
     length--;
   }
 
   return result;
 }
 
-export function generateCode({ length, type = "alphanumeric" }: GenerateCodeOptions): string {
-  if (type === "alpha") return generate(length, ALPHA);
-  if (type === "numeric") return generate(length, NUMERIC);
+
+function generateSecure(length: number, charset: string): string {
+  const max = charset.length;
+  const result: string[] = [];
+  const randomBuffer = new Uint8Array(1);
+
+  while (result.length < length) {
+    crypto.getRandomValues(randomBuffer);
+    const byte = randomBuffer[0]!;
+
+    if (byte < Math.floor(256 / max) * max) {
+      result.push(charset[byte % max]!);
+    }
+  }
+
+  return result.join("");
+}
+
+
+function randomString(length: number): string {
   return generate(length, ALPHANUM);
 }
 
-export function randomString(length: number): string {
-  return generate(length, ALPHANUM);
-}
-
-export function randomAlpha(length: number): string {
+function randomAlpha(length: number): string {
   return generate(length, ALPHA);
 }
 
-export function randomNumeric(length: number): string {
+function randomNumeric(length: number): string {
   return generate(length, NUMERIC);
+}
+
+
+export function generateCode({length,type = "alpha",secure = false}: GenerateOptions): string {
+  const charset =
+    type === "alpha" ? ALPHA :
+    type === "numeric" ? NUMERIC :
+    ALPHANUM;
+
+  return secure
+    ? generateSecure(length, charset)
+    : generate(length, charset);
 }

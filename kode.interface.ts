@@ -1,4 +1,7 @@
-export interface GenerateCodeOptions {
+export type CodeType = "alpha" | "numeric" | "alphanumeric";
+
+export interface GenerateOptions {
   length: number;
-  type?: "alpha" | "numeric" | "alphanumeric";
+  type?: CodeType;
+  secure?: boolean;
 }

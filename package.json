@@ -1,6 +1,6 @@
 {
   "name": "genkode",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A lightweight Node.js utility to generate random alphanumeric, alphabetic, or numeric strings.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
